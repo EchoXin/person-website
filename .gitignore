@@ -4,10 +4,10 @@ dist
 specs.js
 #*bundle.js
 _SpecRunner.html
-*.woff2
-*.woff
+#*.woff2
+#*.woff
 *.svg
-*.ttf
+#*.ttf
 *.eot
 
 # Created by https://www.gitignore.io
