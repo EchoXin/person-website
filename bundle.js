@@ -21,7 +21,7 @@ webpackJsonp([0],[
 
 	// attach getFormFields globally
 
-	__webpack_require__(15);
+	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"expose?getFormFields!./lib/get-form-fields.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 /***/ },
 /* 1 */
@@ -429,78 +429,6 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["jQuery"] = __webpack_require__(13);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["getFormFields"] = __webpack_require__(16);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var addFormField = function addFormField(target, names, value) {
-	  var name = names.shift();
-	  var next = names[0];
-	  if (next === '') {
-	    // name is an array
-	    target[name] = target[name] || [];
-	    target[name].push(value);
-	  } else if (next) {
-	    // name is a parent key
-	    target[name] = target[name] || {};
-	    addFormField(target[name], names, value);
-	  } else {
-	    // name is the key for value
-	    target[name] = value;
-	  }
-
-	  return target;
-	};
-
-	var getFormFields = function getFormFields(form) {
-	  var target = {};
-
-	  var elements = form.elements || [];
-	  for (var i = 0; i < elements.length; i++) {
-	    var e = elements[i];
-	    if (!e.hasAttribute('name')) {
-	      continue;
-	    }
-
-	    var type = 'TEXT';
-	    switch (e.nodeName.toUpperCase()) {
-	      case 'SELECT':
-	        type = e.hasAttribute('multiple') ? 'MULTIPLE' : type;
-	        break;
-	      case 'INPUT':
-	        type = e.getAttribute('type').toUpperCase();
-	        break;
-	    }
-
-	    var names = e.getAttribute('name').split('[').map(function (k) {
-	      return k.replace(/]$/, '');
-	    });
-
-	    if (type === 'MULTIPLE') {
-	      for (var _i = 0; _i < e.length; _i++) {
-	        if (e[_i].selected) {
-	          addFormField(target, names.slice(), e[_i].value);
-	        }
-	      }
-	    } else if (type !== 'RADIO' && type !== 'CHECKBOX' || e.checked) {
-	      addFormField(target, names, e.value);
-	    }
-	  }
-
-	  return target;
-	};
-
-	module.exports = getFormFields;
 
 /***/ }
 ]);
